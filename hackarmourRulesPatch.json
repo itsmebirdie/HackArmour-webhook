@@ -1,0 +1,54 @@
+{
+    "id": "$id",
+    "type": 0,
+    "content": "https://discord.gg/3kAsz8ssJ6",
+    "channel_id": "$channel_id",
+    "author": {
+        "bot": true,
+        "id": "$botId",
+        "username": "HackArmour",
+        "avatar": null,
+        "discriminator": "0000"
+    },
+    "attachments": [],
+    "embeds": [{
+        "type": "rich",
+        "url": "https://hackarmour.tech/",
+        "title": "HACK ARMOUR RULES",
+        "description": "There are some rules you need to follow before talking in the Hack Armour Discord server...",
+        "color": 15021587,
+        "fields": [{
+            "name": "General Rules \ud83d\ude03",
+            "value": "**1.** Respect https://discordapp.com/terms and https://discordapp.com/guidelines\r\n**2.** Respect each other - hate speech, racism, homophobia, bullying or toxic behavior are not tolerated here.\r\n**3.** No controversial topics - this includes, but is not limited to politics, religion or other heavy subjects.\r\n**4.** No NSFW (not safe for work) content is allowed on the server.\r\n**5.** No spam - this includes, but is not limited to posting walls, excessive pings, emote or image spam, raiding, abusing spoiler tags, malicious links, etc.\r\n**6.** Self-advertising and begging/asking for free stuff are not allowed - this includes DMs.\r\n**7.** Outside of language channels, keep all communication in English.\r\n**8.** Malicious use of alts to give yourself an unfair advantage, disrupt the server or to avoid bans is forbidden. Alts are only allowed for testing purposes.\r\n**9.** Interfering with staff\u2019s duties by arguing, misinforming them or giving false evidence is forbidden.\r\n**10.** No Ship Toasting in #general",
+            "inline": false
+        }, {
+            "name": "Voice Chat Rules \ud83d\udc4b",
+            "value": "**11.** Recording conversations in voice channels, without the explicit consent of all participants, is forbidden.\r\n**12.** Playing annoying music, earrape, using soundboards or purposefully making annoying noises in voice channels is forbidden.",
+            "inline": false
+        }, {
+            "name": "Profile Rules \ud83e\udd37\u200d\u2642\ufe0f",
+            "value": "**13.** Impersonating staff members, other server members or bots is forbidden.\r\n**14.** Offensive nicknames, statuses or profile pictures are forbidden\r\n**15.** Advertising in your nickname is forbidden.\r\n**16.** No unsolicited dms",
+            "inline": false
+        }, {
+            "name": "HAPPY HACKING!",
+            "value": ".",
+            "inline": false
+        }],
+        "image": {
+            "url": "https://raw.githubusercontent.com/itsmebirdie/HackArmour-webhook/master/hackarmour_rule.gif",
+            "proxy_url": "https://images-ext-2.discordapp.net/external/FcHKtEouqY9FyJsGWVQ1jm2OKTGRvZjJf8njqnjssM4/https/raw.githubusercontent.com/itsmebirdie/HackArmour-webhook/master/hackarmour_rule.gif",
+            "width": 640,
+            "height": 208
+        }
+    }],
+    "mentions": [],
+    "mention_roles": [],
+    "pinned": false,
+    "mention_everyone": false,
+    "tts": false,
+    "timestamp": "$timeStamp",
+    "edited_timestamp": "$editedTimeStamp",
+    "flags": 0,
+    "components": [],
+    "webhook_id": "$webhook"
+}
