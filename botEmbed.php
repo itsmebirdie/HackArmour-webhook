@@ -224,6 +224,34 @@ class DiscordWebhook {
     return $this;
   }
   
+  # FIELDS
+  
+  public function addField($name, $val, $inline=false, $index=null) {
+    $field = [$name, $val, $inline];
+    if (isset($index)) {
+      $this->spliceFields($index, 0, $field);
+    } else {
+      $this->embeds[0]["fields"][] = $this->formatField(...$field);
+    }
+    return $this;
+  }
+  
+  private function formatField($name, $val, $inline=false) {
+    return [
+      'name' => $name,
+      'value' => $val,
+      'inline' => $inline
+    ];
+  }
+  
+  public function addFields(...$fields) {
+    foreach ($fields as $field) {
+      if (empty($field)) continue;
+      $this->addField(...$field);
+    }
+    return $this;
+  }
+  
   
   
   
@@ -285,8 +313,63 @@ class DiscordWebhook {
     ];
     
   }
+
+  public function edit($opts=[]) {
+    $webhook = $this->webhook;
+
+    if ($opts) {
+      if (is_array($opts)) {
+        $this->setOpts($opts);
+      } else {
+        $webhook = $opts;
+      }
+    }
+    
+    if (!isset($webhook) || !$this->isDiscordWebhook($webhook)) throw new Exception('UNABLE TO EDIT MESSAGE WITHOUT WEBHOOK OR INVALID WEBHOOK!');
+    
+    if (!isset($this->content) && empty($this->embeds)) throw new Exception('UNABLE TO EDIT WITH AN EMPTY MESSAGE.');
+    
+    if ($this->wait_message) $webhook = $webhook . "?wait=true";
+    
+    $curlopts = [
+      CURLOPT_PATCH => true,
+      CURLOPT_RETURNTRANSFER => true,
+      CURLOPT_FOLLOWLOCATION => true
+    ];
+    
+    if (isset($this->files)) {
+      $contentType = "multipart/form-data";
+      foreach ($this->files as $i => $file) $this->{'file_'.++$i} = curl_file_create($file["file"], null, $file["name"]);
+      unset($this->files);
+      $data = $this->toArray() + [
+        "payload_json" => $this->toJSON()
+      ];
+    } else {
+      $contentType = "application/json";
+      $data = $this->toJSON();
+    }
+    
+    $curlopts[CURLOPT_PATCHFIELDS] = $data;
+    $curlopts[CURLOPT_RESPONSEHEADER][] = 'Content-type: '.$contentType;
+    
+    $ch = curl_init($webhook);
+    curl_setopt_array($ch, $curlopts);
+    $res = curl_exec($ch);
+    $code = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+    curl_close($ch);
+    
+    $success = $code >= 200 && $code < 400;
+    
+    return (object) [
+      'success' => $success, 
+      'body' => $res,
+      'code' => $code,
+      'message' => $success ? json_decode($res) : null
+    ];
+    
+  }
   
   
 }
 
-#?>
+?>
